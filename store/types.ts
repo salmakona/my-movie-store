@@ -8,4 +8,5 @@ export interface MultiState {
   tvs: Array<any>;
   peoples: Array<any>;
   noResult: Boolean;
+  tvShow: Object;
 }

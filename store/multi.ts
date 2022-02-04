@@ -13,6 +13,7 @@ export const state = (): MultiState => ({
   tvs: [],
   peoples: [],
   noResult: false,
+  tvShow: {},
 });
 
 export const getters: GetterTree<MultiState, MultiState> = {
@@ -24,6 +25,7 @@ export const getters: GetterTree<MultiState, MultiState> = {
   tvs: (state: MultiState): Object => state.tvs,
   peoples: (state: MultiState): Object => state.peoples,
   noResult: (state: MultiState): Object => state.noResult,
+  tvShow: (state: MultiState): Object => state.tvShow,
 };
 
 export const actions: ActionTree<MultiState, MultiState> = {
@@ -138,6 +140,12 @@ export const actions: ActionTree<MultiState, MultiState> = {
     });
     commit("SET_TO_PEOPLES", peoples);
   },
+  async setTv({ commit, state }, payload) {
+    const res = await this.$axios.get(
+      `https://api.themoviedb.org/3/tv/${payload.tvId}?api_key=${API_KEY}`
+    );
+    commit("SET_TO_TV", res?.data);
+  },
 };
 
 export const mutations: MutationTree<MultiState> = {
@@ -164,6 +172,9 @@ export const mutations: MutationTree<MultiState> = {
   },
   SET_NO_RESULT(state: MultiState, data) {
     state.noResult = data;
+  },
+  SET_TO_TV(state: MultiState, data) {
+    state.tvShow = data;
   },
 };
 

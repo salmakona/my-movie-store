@@ -1,6 +1,6 @@
 <template>
   <div class="steaming-container">
-    <div class="d-flex justify-content-center p-3" v-if="movies.length==0">
+    <div class="d-flex justify-content-center p-3" v-if="movies.length == 0">
       <b-spinner type="grow" label="Loading..."></b-spinner>
     </div>
     <div class="container movies">
@@ -13,10 +13,10 @@
             <p class="overview">{{ movie.overview }}</p>
           </div>
           <div class="info">
-            <p class="title">
+            <b-link class="title" @click="toMovie(movie)">
               {{ movie.title.slice(0, 20)
               }}<span v-if="movie.title.length > 15">...</span>
-            </p>
+            </b-link>
             <p class="release">
               {{
                 new Date(movie.release_date).toLocaleString("en-us", {
@@ -28,7 +28,7 @@
             </p>
             <span class="overview">{{ movie.overview.slice(0, 100) }}</span>
             <br />
-            <b-link class="button button-light" @click="tomovie(movie)">
+            <b-link class="button button-light" @click="toMovie(movie)">
               Read more
             </b-link>
           </div>
@@ -43,11 +43,11 @@ export default {
   name: "SteamingComponent",
   data() {
     return {
-      loader:true
+      loader: true,
     };
   },
   methods: {
-    async tomovie(value) {
+    async toMovie(value) {
       const movieId = value.id;
       await this.$router.push("/movie/" + movieId);
     },

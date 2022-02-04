@@ -24,7 +24,7 @@
               class="button button-light"
               v-for="known_for in people.known_for"
               v-bind:key="known_for.id"
-              disabled
+              @click="toMovie(known_for)"
             >
               {{ known_for.title }}
             </b-link>
@@ -64,7 +64,12 @@ export default Vue.extend({
       ],
     };
   },
-  methods: {},
+   methods: {
+    async toMovie(value) {
+      const movieId = value.id;
+      await this.$router.push("/movie/" + movieId);
+    },
+  },
   computed: {
     peoples() {
       return this.$store.getters["multi/peoples"];

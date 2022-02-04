@@ -13,9 +13,9 @@
             <p class="overview">{{ shows.overview }}</p>
           </div>
           <div class="info">
-            <p class="title">
+            <b-link class="title" @click="toShow(shows)">
               {{ shows.name }}
-            </p>
+            </b-link>
             <p class="release">
               {{
                 new Date(shows.first_air_date).toLocaleString("en-us", {
@@ -27,6 +27,9 @@
             </p>
             <span class="overview">{{ shows.overview.slice(0, 100) }}</span>
             <br />
+            <b-link class="button button-light" @click="toShow(shows)">
+              Read more
+            </b-link>
           </div>
         </div>
       </div>
@@ -62,9 +65,9 @@ export default Vue.extend({
     };
   },
   methods: {
-    async tomovie(value) {
-      const movieId = value.id;
-      await this.$router.push("/movie/" + movieId);
+    async toShow(value) {
+      const tvId = value.id;
+      await this.$router.push("/shows/" + tvId);
     },
   },
   computed: {

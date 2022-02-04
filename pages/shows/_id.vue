@@ -12,13 +12,13 @@
       </div>
       <div class="content">
         <h4>
-          <b-link :href="`${movie.homepage}`">{{ movie.original_title }}</b-link>
+          <b-link :href="`${movie.homepage}`">{{ movie.original_name }}</b-link>
         </h4>
         <br />
         <p class="info-text">
           <span>Released:</span>
           {{
-            new Date(movie.release_date).toLocaleString("en-us", {
+            new Date(movie.last_air_date).toLocaleString("en-us", {
               month: "long",
               day: "numeric",
               year: "numeric",
@@ -26,13 +26,6 @@
           }}
         </p>
         <p class="info-text tagline"><span>Tagline:</span> {{ movie.tagline }}</p>
-
-        <p class="info-text"><span>Duration:</span> {{ movie.runtime }} minutes</p>
-
-        <p class="info-text">
-          <span>Revenue:</span>
-          $ {{ movie.revenue }}
-        </p>
         <p class="info-text"><span>Language:</span> {{ movie.original_language }}</p>
         <p class="info-text">
           <span>Genres:</span>
@@ -42,7 +35,6 @@
         </p>
 
         <p class="info-text"><span>Overview:</span> {{ movie.overview }}</p>
-        <p class="info-text"><span>Budget:</span> $ {{ movie.budget }}</p>
         <p class="info-text"><span>Popularity:</span> {{ movie.popularity }}</p>
         <p class="info-text">
           <span>Production:</span>
@@ -74,12 +66,12 @@ export default Vue.extend({
   },
   head() {
     return {
-      title: "Movies",
+      title: "Shows",
       meta: [
         {
           hid: "description",
-          name: "description",
-          content: "My custom description",
+          name: "Shows",
+          content: "My custom Shows",
         },
       ],
     };
@@ -91,12 +83,13 @@ export default Vue.extend({
   },
   computed: {
     movie() {
-      return this.$store.getters["multi/movie"];
+      return this.$store.getters["multi/tvShow"];
     },
   },
   async created() {
-    await this.$store.dispatch("multi/setMovie", {
-      movieId: this.$route.params.id,
+    console.log("this.$route.params.id", this.$route.params.id);
+    await this.$store.dispatch("multi/setTv", {
+      tvId: this.$route.params.id,
     });
   },
 });

@@ -33,15 +33,15 @@
               v-for="known_for in item.known_for"
               v-bind:key="known_for.id"
             >
-              <span @click="tomovie(known_for)">
+              <span @click="toMovie(known_for)">
                 {{ known_for.original_title }}
               </span>
             </b-link>
             <br />
             <b-link
               class="button button-light"
-              :v-if="item.key == 'movie'"
-              @click="tomovie(item)"
+              v-if="(item.key === 'movie') | (item.key === 'tv')"
+              @click="toMovie(item)"
             >
               Read more
             </b-link>
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div v-if="items.length==0 && noResult">
+    <div v-if="items.length == 0 && noResult">
       <h1 class="h1">No results found</h1>
     </div>
   </div>
@@ -80,7 +80,7 @@ export default {
     },
   },
   methods: {
-    async tomovie(value) {
+    async toMovie(value) {
       const movieId = value.id;
       await this.$router.push("/movie/" + movieId);
     },

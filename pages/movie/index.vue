@@ -1,7 +1,7 @@
 <template>
   <div class="steaming-container">
     <div class="container movies">
-      <h1 class="h1">Movies</h1>
+      <h1 class="h1">Popular Movies</h1>
       <div id="movie-grid" class="movies-grid">
         <div class="movie" v-for="(movie, index) in movies" :key="index">
           <div class="movie-img">
@@ -10,10 +10,10 @@
             <p class="overview">{{ movie.overview }}</p>
           </div>
           <div class="info">
-            <p class="title">
+            <b-link class="title" @click="toMovie(movie)">
               {{ movie.title.slice(0, 20)
               }}<span v-if="movie.title.length > 15">...</span>
-            </p>
+            </b-link>
             <p class="release">
               {{
                 new Date(movie.release_date).toLocaleString("en-us", {
@@ -25,7 +25,7 @@
             </p>
             <span class="overview">{{ movie.overview.slice(0, 100) }}</span>
             <br />
-            <b-link class="button button-light" @click="tomovie(movie)">
+            <b-link class="button button-light" @click="toMovie(movie)">
               Read more
             </b-link>
           </div>
@@ -63,7 +63,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    async tomovie(value) {
+    async toMovie(value) {
       const movieId = value.id;
       await this.$router.push("/movie/" + movieId);
     },
