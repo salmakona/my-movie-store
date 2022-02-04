@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
 import searchForm from "../components/searchForm.vue";
 import SteamingComponent from "../components/steamingComponent.vue";
